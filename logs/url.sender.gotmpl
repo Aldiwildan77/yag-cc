@@ -1,0 +1,22 @@
+{{
+  /*
+	Usage: automatically
+	Recommended trigger: Regex trigger with trigger `^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$`
+  */
+}}
+
+{{ $channel := <channel_id> }} {{ /* change channel_id with your channel receiver */}}
+
+{{ $msg := joinStr "" "Someone send an URL to the channel\n\n" 
+  "Sender " (userArg (.Message.Author.ID)).Mention "\n"
+  "Channel  <#" (.Message.ChannelID) ">\n" 
+  "URL " (.Message.Content)
+}}
+
+{{ $msgEmbed := cembed 
+	"title" "Channel Logs" 
+	"description" ($msg) 
+	"color" 16763904 
+}}
+
+{{ sendMessage $channel $msgEmbed }}
