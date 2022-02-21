@@ -1,0 +1,7 @@
+{{if eq (len .Args) 2}}
+    {{$role := "Role"}}
+    {{giveRoleName (userArg (index .CmdArgs 0)) $role}}
+    Gave {{$role}} to {{index .CmdArgs 0}}! :white_check_mark:
+{{else}}
+    Correct usage of the command: >friend <target>
+{{end}}
